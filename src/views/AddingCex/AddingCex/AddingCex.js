@@ -78,7 +78,7 @@ class ThemeColor extends Component {
 }
 
 
-class CustomComponent extends Component {
+class AddingCex extends Component {
 
   constructor(props) {
     super(props);
@@ -118,7 +118,7 @@ class CustomComponent extends Component {
       })*/
     this.sendToServer()
   }
-
+  
   toggle() {
     this.setState({
       modal: !this.state.modal,
@@ -267,4 +267,4 @@ class CustomComponent extends Component {
   }
 }
 
-export default CustomComponent;
+export default AddingCex;
