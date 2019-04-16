@@ -1,6 +1,6 @@
 {
-  "name": "Innet",
+  "name": "Cex",
   "version": "0.0.0",
   "private": true,
-  "main": "Inner.js"
+  "main": "Cex.js"
 }

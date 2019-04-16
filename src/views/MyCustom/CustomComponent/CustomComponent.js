@@ -111,11 +111,11 @@ class CustomComponent extends Component {
   }
 
   componentDidMount(){
-    /*axios.get('http://localhost:8080/price/getAll')
+    axios.get('http://localhost:8080/category/getAll')
       .then(res => {
         const people = res.data;
         this.setState({people});
-      })*/
+      })
     //this.sendToServer()
   }
 
@@ -170,6 +170,7 @@ class CustomComponent extends Component {
   }
 
   sendNewCategory(event){
+    console.log("hi");
     this.sendToServer();
     this.togglePrimary();
 
@@ -179,12 +180,12 @@ class CustomComponent extends Component {
 
   sendToServer(){
     var data = {
-      categoryName: this.state.name,
-      description: this.state.desc
+      name: this.state.name,
+      desc: this.state.desc
     };
     var arr;
     console.log(data);
-    axios.post('http://localhost:8080/price/add', data)
+    axios.post('http://localhost:8080/category/add', data)
       .then(res => {
         console.log(res)
         this.setState({people:res.data})
@@ -203,11 +204,11 @@ class CustomComponent extends Component {
 
         <a href="#" className="list-group-item list-group-item-action" >
           <Link to={{
-            pathname: '/custom/component/' +  value.id,
+            pathname: '/custom/component/' +  value.name,
             state: { fromDashboard: true }
           }} style={{ textDecoration: 'none' }}>
-            <h5 className="list-group-item-heading">{value.categoryName}</h5>
-            <p className="list-group-item-text">{value.description}</p><span className=" pull-right">{value.count}</span>
+            <h5 className="list-group-item-heading">{value.name}</h5>
+            <p className="list-group-item-text">{value.desc}</p><span className=" pull-right">{value.count}</span>
           </Link>
         </a>
     )
@@ -226,8 +227,6 @@ class CustomComponent extends Component {
 
     return (
       <div>
-        <CardBody>
-        <Card>
           <Row className="align-items-center">
             <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
               <Button color="primary" onClick={this.togglePrimary}>
@@ -256,8 +255,6 @@ class CustomComponent extends Component {
               </Modal>
             </Col>
           </Row>
-        </Card>
-      </CardBody>
         <div className="list-group">
           {this.testRender()}
         </div>

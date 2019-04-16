@@ -38,8 +38,8 @@ const User = React.lazy(() => import('./views/Users/User'));
 
 const CustomComponent = React.lazy(() => import('./views/MyCustom/CustomComponent'));
 const Inner = React.lazy(() => import('./views/MyCustom/Inner'));
-const newCustom = React.lazy(() => import('./views/NewCustom/CustomComponent'));
-const refresh = React.lazy(() => import('./views/NewCustomRefresh/CustomComponent'));
+const WorkWithCex = React.lazy(() => import('./views/WorkWithCex/Cex'));
+const Cex = React.lazy(() => import('./views/Test/Cex'));
 
 
 const routes = [
@@ -48,11 +48,11 @@ const routes = [
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
 
-  { path: '/custom/component', exact: true, name: 'CustomComponent', component: CustomComponent },
-  { path: '/custom/component/:name', name: 'Inner', component: Inner },
-  { path: '/cex', exact: true, name: 'Цеха', component: newCustom },
-  { path: '/fortest', name: 'Refresh', component: refresh },
-
+  { path: '/custom/component', exact: true, name: 'Категории', component: CustomComponent },
+  { path: '/custom/component/:name', name: 'Продукты', component: Inner },
+  { path: '/cex', exact: true, name: 'Цеха', component: WorkWithCex },
+  //{ path: '/fortest', name: 'Refresh', component: refresh },
+  { path: '/fortest', name: 'Refresh', component: Cex },
   { path: '/theme/typography', name: 'Typography', component: Typography },
   { path: '/base', exact: true, name: 'Base', component: Cards },
   { path: '/base/cards', name: 'Cards', component: Cards },

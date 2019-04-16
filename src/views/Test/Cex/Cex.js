@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 
-class CustomComponent extends Component {
+class Cex extends Component{
   componentDidMount(){
     console.log('test');
     //window.WorkWithCex.refresh();
@@ -17,7 +17,6 @@ class CustomComponent extends Component {
       </wrapper>
     );
   }
-
 }
 
-export default CustomComponent;
+export default Cex;
