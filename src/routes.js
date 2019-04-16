@@ -39,7 +39,7 @@ const User = React.lazy(() => import('./views/Users/User'));
 const CustomComponent = React.lazy(() => import('./views/MyCustom/CustomComponent'));
 const Inner = React.lazy(() => import('./views/MyCustom/Inner'));
 const newCustom = React.lazy(() => import('./views/NewCustom/CustomComponent'));
-const refresh = React.lazy(() => import('./views/RefreshCustom/Refresh'));
+const refresh = React.lazy(() => import('./views/NewCustomRefresh/CustomComponent'));
 
 
 const routes = [
@@ -51,7 +51,7 @@ const routes = [
   { path: '/custom/component', exact: true, name: 'CustomComponent', component: CustomComponent },
   { path: '/custom/component/:name', name: 'Inner', component: Inner },
   { path: '/cex', exact: true, name: 'Цеха', component: newCustom },
-  { path: '/refresh', exact: true, name: 'Refresh', component: refresh },
+  { path: '/fortest', name: 'Refresh', component: refresh },
 
   { path: '/theme/typography', name: 'Typography', component: Typography },
   { path: '/base', exact: true, name: 'Base', component: Cards },

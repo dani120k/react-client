@@ -1,7 +1,7 @@
 import React from 'react';
-import Refresh from './Refresh';
+import Colors from './CustomComponent';
 import { mount } from 'enzyme'
 
 it('renders without crashing', () => {
-  mount(<Refresh />);
+  mount(<Colors />);
 });

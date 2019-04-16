@@ -116,7 +116,7 @@ class CustomComponent extends Component {
         const people = res.data;
         this.setState({people});
       })*/
-    this.sendToServer()
+    //this.sendToServer()
   }
 
   toggle() {

@@ -20,7 +20,7 @@ import { rgbToHex } from '@coreui/coreui/dist/js/coreui-utilities'
 import * as axios  from 'axios';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-
+import NewCustomRefresh from 'C:/Users/forol/WebstormProjects/react-client/src/views/NewCustomRefresh/CustomComponent'
 
 
 
@@ -231,6 +231,7 @@ class CustomComponent extends Component {
 
     return (
       <div>
+        <NewCustomRefresh sendFunction={this.refresh}/>
         <CardBody>
         <Card>
           <Row className="align-items-center">
