@@ -11,7 +11,7 @@ export default {
     },
     {
       title: true,
-      name: 'Custom',
+      name: 'Цеха',
       wrapper: {            // optional wrapper object
         element: '',        // required valid HTML5 element tag
         attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
@@ -19,7 +19,22 @@ export default {
       class: ''             // optional class names space delimited list for title item ex: "text-center"
     },
     {
-      name: 'CustomComponent',
+      name: 'Редактировать',
+      url: '/cex',
+      icon: 'cui-bookmark',
+    },
+    ,
+    {
+      title: true,
+      name: 'Категории меню',
+      wrapper: {            // optional wrapper object
+        element: '',        // required valid HTML5 element tag
+        attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
+      },
+      class: ''             // optional class names space delimited list for title item ex: "text-center"
+    },
+    {
+      name: 'Редактировать',
       url: '/custom/component',
       icon: 'cui-bookmark',
     },

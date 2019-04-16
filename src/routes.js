@@ -36,10 +36,10 @@ const Widgets = React.lazy(() => import('./views/Widgets/Widgets'));
 const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
 
-
-const Cex = React.lazy(() => import('./views/AddingCex/AddingCex'));
 const CustomComponent = React.lazy(() => import('./views/MyCustom/CustomComponent'));
 const Inner = React.lazy(() => import('./views/MyCustom/Inner'));
+const newCustom = React.lazy(() => import('./views/NewCustom/CustomComponent'));
+const refresh = React.lazy(() => import('./views/RefreshCustom/Refresh'));
 
 
 const routes = [
@@ -50,7 +50,9 @@ const routes = [
 
   { path: '/custom/component', exact: true, name: 'CustomComponent', component: CustomComponent },
   { path: '/custom/component/:name', name: 'Inner', component: Inner },
-  { path: '/cex', name: 'Цехи', component: Cex },
+  { path: '/cex', exact: true, name: 'Цеха', component: newCustom },
+  { path: '/refresh', exact: true, name: 'Refresh', component: refresh },
+
   { path: '/theme/typography', name: 'Typography', component: Typography },
   { path: '/base', exact: true, name: 'Base', component: Cards },
   { path: '/base/cards', name: 'Cards', component: Cards },

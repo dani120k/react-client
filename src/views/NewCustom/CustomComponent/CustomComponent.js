@@ -78,7 +78,7 @@ class ThemeColor extends Component {
 }
 
 
-class AddingCex extends Component {
+class CustomComponent extends Component {
 
   constructor(props) {
     super(props);
@@ -108,6 +108,11 @@ class AddingCex extends Component {
     this.handleChangeCat = this.handleChangeCat.bind(this);
     this.handleChangeDesc = this.handleChangeDesc.bind(this);
     this.sendToServer = this.sendToServer.bind(this);
+    this.refresh = this.refresh.bind(this);
+  }
+
+  refresh(){
+    console.log("get refresh");
   }
 
   componentDidMount(){
@@ -118,7 +123,7 @@ class AddingCex extends Component {
       })*/
     this.sendToServer()
   }
-  
+
   toggle() {
     this.setState({
       modal: !this.state.modal,
@@ -267,4 +272,4 @@ class AddingCex extends Component {
   }
 }
 
-export default AddingCex;
+export default CustomComponent;
