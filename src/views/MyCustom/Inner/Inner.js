@@ -13,6 +13,8 @@ import {
 import * as axios from "axios";
 import logo from './logo400x400.jpg';
 import { Badge } from 'reactstrap';
+import { DropdownButton, Dropdown } from 'react-bootstrap';
+import { MenuItem } from 'react-bootstrap';
 
 var static_name;
 
@@ -31,6 +33,9 @@ class Inner extends Component {
       info: false,
       people: [],
       name: 'name',
+      price: 0,
+      desc: '',
+      cex: [],
     };
 
     this.toggle = this.toggle.bind(this);
@@ -38,13 +43,11 @@ class Inner extends Component {
     this.sendNewCategory = this.sendNewCategory.bind(this);
     this.handleChangeCat = this.handleChangeCat.bind(this);
     this.sendToServer = this.sendToServer.bind(this);
-    this.force = this.force.bind(this);
-    this.updateCex = this.updateCex(this);
+    this.updateCex = this.updateCex.bind(this);
+    this.handleChangePrice = this.handleChangePrice.bind(this);
+    this.handleChangeDesc = this.handleChangeDesc.bind(this);
   }
 
-  force(e){
-    console.log('force');
-  }
 
   componentDidMount(){
     console.log(window.location.pathname);
@@ -58,7 +61,8 @@ class Inner extends Component {
   sendToServer(){
     var data = {
       name: this.state.name,
-      price: 100,
+      price: this.state.price,
+      desc: this.state.desc,
       pathToImage: "test"
     };
     console.log(data);
@@ -99,25 +103,24 @@ class Inner extends Component {
 
   }
 
-  updateCex(){
-    axios.get('http://localhost:8080/product/getAll?name='+static_name)
-      .then(res => {
-        this.setState({people:res.data});
-      })
-  }
+
 
 
   testRender = () => {
     console.log(this.state.people);
     var cars =  this.state.people;
-    this.updateCex();
     return this.state.people.map(value => {
       return (
-        <div onClick={this.force()}>
+        <div>
           <a href="#" className="list-group-item list-group-item-action" aria-disabled={true}>
             <img src={logo} width="100" height="100" className="img-rounded" alt="Cinque Terre"/>
+            <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            </DropdownButton>;
             <h5 className="list-group-item-heading">{value.name}</h5>
-            <p className="list-group-item-text">{value.name}</p><span className=" pull-right">{value.price}</span>
+            <p className="list-group-item-text">{value.name}</p><span className=" pull-right">Стоимость: {value.price}</span>
             <Badge variant="primary">Primary</Badge> <Badge variant="primary">Primary</Badge>
           </a>
         </div>
@@ -125,8 +128,23 @@ class Inner extends Component {
     })
   }
 
+  updateCex(){
+    axios.get('http://localhost:8080/cex/getAll')
+      .then(res => {
+        this.setState({cex:res.data});
+      })
+  }
+
   handleChangeCat(event){
     this.setState({name: event.target.value});
+  }
+
+  handleChangePrice(event){
+    this.setState({price: event.target.value});
+  }
+
+  handleChangeDesc(event){
+    this.setState({desc: event.target.value});
   }
 
   render() {
@@ -150,6 +168,16 @@ class Inner extends Component {
                     </TextField>
                   </ModalBody>
                   <ModalBody>
+                    <TextField label="Цена" outlined textarea onChange={(e) => {this.handleChangePrice(e)}}>
+                      <Input name="name" inputType="text" />
+                    </TextField>
+                  </ModalBody>
+                  <ModalBody>
+                    <TextField label="Состав" outlined textarea onChange={(e) => {this.handleChangeDesc(e)}}>
+                      <Input name="name" inputType="text" />
+                    </TextField>
+                  </ModalBody>
+                  <ModalBody>
                     <label className="upload">
                       <input type="file" accept="image/jpeg,image/png,image/gif"/>
                       <p className="filename"></p>
@@ -164,8 +192,8 @@ class Inner extends Component {
                 </Modal>
               </Col>
             </Row>
-        <div className="list-group" id='example' onClick={this.force}>
-          {this.testRender()}
+        <div className="list-group" id='example'>
+          {this.updateCex()}{ this.testRender()}
         </div>
 
       </div>

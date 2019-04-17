@@ -230,8 +230,6 @@ class Cex extends Component {
 
     return (
       <div>
-        <CardBody>
-        <Card>
           <Row className="align-items-center">
             <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
               <Button color="primary" onClick={this.togglePrimary}>
@@ -260,8 +258,6 @@ class Cex extends Component {
               </Modal>
             </Col>
           </Row>
-        </Card>
-      </CardBody>
         <div className="list-group">
           {this.testRender()}
         </div>
