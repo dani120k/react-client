@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
@@ -10,6 +12,7 @@ import {
 } from 'reactstrap'
 import * as axios from "axios";
 import logo from './logo400x400.jpg';
+import { Badge } from 'reactstrap';
 
 var static_name;
 
@@ -36,6 +39,7 @@ class Inner extends Component {
     this.handleChangeCat = this.handleChangeCat.bind(this);
     this.sendToServer = this.sendToServer.bind(this);
     this.force = this.force.bind(this);
+    this.updateCex = this.updateCex(this);
   }
 
   force(e){
@@ -95,10 +99,18 @@ class Inner extends Component {
 
   }
 
+  updateCex(){
+    axios.get('http://localhost:8080/product/getAll?name='+static_name)
+      .then(res => {
+        this.setState({people:res.data});
+      })
+  }
+
 
   testRender = () => {
     console.log(this.state.people);
     var cars =  this.state.people;
+    this.updateCex();
     return this.state.people.map(value => {
       return (
         <div onClick={this.force()}>
@@ -106,6 +118,7 @@ class Inner extends Component {
             <img src={logo} width="100" height="100" className="img-rounded" alt="Cinque Terre"/>
             <h5 className="list-group-item-heading">{value.name}</h5>
             <p className="list-group-item-text">{value.name}</p><span className=" pull-right">{value.price}</span>
+            <Badge variant="primary">Primary</Badge> <Badge variant="primary">Primary</Badge>
           </a>
         </div>
       )
@@ -122,6 +135,7 @@ class Inner extends Component {
 
     return (
       <div>
+
             <Row className="align-items-center">
               <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
                 <Button color="primary" onClick={this.togglePrimary}>
@@ -153,6 +167,7 @@ class Inner extends Component {
         <div className="list-group" id='example' onClick={this.force}>
           {this.testRender()}
         </div>
+
       </div>
     );
   }
