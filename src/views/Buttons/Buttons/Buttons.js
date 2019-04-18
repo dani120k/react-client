@@ -15,7 +15,7 @@ class Buttons extends Component {
                 Normal
               </Col>
               <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block color="primary">Primary</Button>
+                <Button onClick={e => {console.log(e)}} block color="primary">Primary</Button>
               </Col>
               <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
                 <Button block color="secondary">Secondary</Button>

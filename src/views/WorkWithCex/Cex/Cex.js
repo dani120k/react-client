@@ -188,7 +188,7 @@ class Cex extends Component {
     };
     var arr;
     console.log(data);
-    axios.post('http://localhost:8080/price/add', data)
+    axios.post('http://localhost:8080/cex/add', data)
       .then(res => {
         console.log(res)
         this.setState({people:res.data})
@@ -205,7 +205,7 @@ class Cex extends Component {
     return cars.map(value => {
       return (
 
-        <a href="#" className="list-group-item list-group-item-action" >
+        <a className="list-group-item list-group-item-action" >
           <Link to={{
             pathname: '/custom/component/' +  value.id,
             state: { fromDashboard: true }
@@ -233,19 +233,23 @@ class Cex extends Component {
           <Row className="align-items-center">
             <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
               <Button color="primary" onClick={this.togglePrimary}>
-                <i className="fa fa-lightbulb-o"></i>&nbsp;Добавить новую категорию
+                <i className="fa fa-lightbulb-o"></i>&nbsp;Добавить новый цех
               </Button>
               <Modal isOpen={this.state.primary} toggle={this.togglePrimary}
                      className={'modal-primary ' + this.props.className}>
                 <ModalHeader toggle={this.togglePrimary}>Создание категории</ModalHeader>
                 <ModalBody>
-                    <TextField label="Название категории" outlined textarea onChange={(e) => {this.handleChangeCat(e)}}>
+                    <TextField label="Название цеха" outlined textarea onChange={(e) => {this.handleChangeCat(e)}}>
                         <Input name="name" inputType="text" />
                     </TextField>
-
                 </ModalBody>
                 <ModalBody>
-                  <TextField label="Краткое описание" outlined textarea onChange={(e) => {this.handleChangeDesc(e)}}>
+                  <TextField label="Имя аккаунта" outlined textarea onChange={(e) => {this.handleChangeDesc(e)}}>
+                    <Input name="name" inputType="text" />
+                  </TextField>
+                </ModalBody>
+                <ModalBody>
+                  <TextField label="Пароль" outlined textarea onChange={(e) => {this.handleChangeDesc(e)}}>
                     <Input name="name" inputType="text" />
                   </TextField>
                 </ModalBody>

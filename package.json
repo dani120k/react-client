@@ -36,6 +36,7 @@
     "react-bootstrap": "^1.0.0-beta.8",
     "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.8.6",
+    "react-input-password": "^1.0.21",
     "react-resize-image": "^1.0.4",
     "react-router-config": "^4.4.0-beta.8",
     "react-router-dom": "^4.3.1",

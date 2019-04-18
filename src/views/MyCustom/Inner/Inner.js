@@ -1,5 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.js';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
@@ -36,6 +36,9 @@ class Inner extends Component {
       price: 0,
       desc: '',
       cex: [],
+      up: false,
+      pathToFile:'./logo400x400.jpg',
+      file:'',
     };
 
     this.toggle = this.toggle.bind(this);
@@ -46,13 +49,30 @@ class Inner extends Component {
     this.updateCex = this.updateCex.bind(this);
     this.handleChangePrice = this.handleChangePrice.bind(this);
     this.handleChangeDesc = this.handleChangeDesc.bind(this);
+    this.deleteProduct = this.deleteProduct.bind(this);
+    this.sendFile = this.sendFile.bind(this);
+  }
+
+  sendFile(){
+    /*let formData = new FormData();
+    formData.append(this.state.pathToFile, this.file);
+    console.log(formData);
+    axios.post( 'localhost:8080/picture/file',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+    ).then(function(){
+      console.log('SUCCESS!!');
+    })*/
   }
 
 
   componentDidMount(){
-    console.log(window.location.pathname);
-    console.log(this.props.location.pathname);
-    axios.get('http://localhost:8080/product/getAll?name='+static_name)
+    console.log(this.props.match.params.name);
+    axios.get('http://localhost:8080/product/getAll?name='+this.props.match.params.name)
       .then(res => {
         this.setState({people:res.data});
       })
@@ -63,7 +83,7 @@ class Inner extends Component {
       name: this.state.name,
       price: this.state.price,
       desc: this.state.desc,
-      pathToImage: "test"
+      pathToImage: this.state.pathToFile,
     };
     console.log(data);
     console.log("naa,e " + static_name)
@@ -103,26 +123,61 @@ class Inner extends Component {
 
   }
 
-
+  deleteProduct(e){
+    console.log(e)
+    axios.get('http://localhost:8080/product/delete?name='+e)
+      .then(res => {
+      })
+    this.componentDidMount();
+    this.render()
+  }
 
 
   testRender = () => {
     console.log(this.state.people);
-    var cars =  this.state.people;
     return this.state.people.map(value => {
       return (
-        <div>
-          <a href="#" className="list-group-item list-group-item-action" aria-disabled={true}>
+        <div id={value.id} key={value.id} aria-disabled={true}>
+          <CardBody>
+          <a className="list-group-item list-group-item-action" aria-disabled={true}>
+            <Row>
+              <Col xs="6" sm="4"></Col>
+              <Col xs="6" sm="4"></Col>
+              <Col sm="4">
+                <Button className="pull-right" color="danger" onClick={e => {this.deleteProduct(value.name)}} >Удалить</Button>
+                <Button className="pull-right" color="secondary" onClick={e=>{this.sendFile()}}>Редактировать</Button>
+              </Col>
+            </Row>
             <img src={logo} width="100" height="100" className="img-rounded" alt="Cinque Terre"/>
-            <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-            </DropdownButton>;
+            <Row>
+              <Col xs="6" sm="4"></Col>
+              <Col xs="6" sm="4"></Col>
+              <Col sm="4">
+                <DropdownButton id="dropdown-basic-button" title="Dropdown button" className="pull-right">
+                  <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                  <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                  <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                </DropdownButton>
+              </Col>
+            </Row>
             <h5 className="list-group-item-heading">{value.name}</h5>
-            <p className="list-group-item-text">{value.name}</p><span className=" pull-right">Стоимость: {value.price}</span>
-            <Badge variant="primary">Primary</Badge> <Badge variant="primary">Primary</Badge>
+            <p className="list-group-item-text">{value.name}</p>
+            <Row>
+              <Col xs="6" sm="4"></Col>
+              <Col xs="6" sm="4"></Col>
+              <Col sm="4">
+                <Badge className="pull-right" variant="primary">Primary</Badge> <Badge className="pull-right" variant="primary">Primary</Badge>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs="6" sm="4"></Col>
+              <Col xs="6" sm="4"></Col>
+              <Col sm="4">
+                <span className="pull-right">Стоимость: {value.price}</span>
+              </Col>
+            </Row>
           </a>
+          </CardBody>
         </div>
       )
     })
@@ -193,7 +248,7 @@ class Inner extends Component {
               </Col>
             </Row>
         <div className="list-group" id='example'>
-          {this.updateCex()}{ this.testRender()}
+          { this.testRender()}
         </div>
 
       </div>

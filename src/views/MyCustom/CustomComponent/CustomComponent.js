@@ -201,16 +201,15 @@ class CustomComponent extends Component {
     var cars =  this.state.people;
     return cars.map(value => {
       return (
-
-        <a href="#" className="list-group-item list-group-item-action" >
-          <Link to={{
-            pathname: '/custom/component/' +  value.name,
-            state: { fromDashboard: true }
-          }} style={{ textDecoration: 'none' }}>
+        <Link to={{
+          pathname: '/custom/component/' +  value.name,
+          state: { fromDashboard: true }
+        }} style={{ textDecoration: 'none' }}>
+            <a className="list-group-item list-group-item-action" >
             <h5 className="list-group-item-heading">{value.name}</h5>
             <p className="list-group-item-text">{value.desc}</p><span className=" pull-right">{value.count}</span>
-          </Link>
         </a>
+        </Link>
     )
     })
   }

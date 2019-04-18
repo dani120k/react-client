@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Button, Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
 
 class BrandButtons extends Component {
+
+
+
   render() {
     return (
       <div className="animated fadeIn">
@@ -21,7 +24,7 @@ class BrandButtons extends Component {
                   <small> Add this class <code>.btn-sm</code></small>
                 </h6>
                 <p>
-                  <Button size="sm" className="btn-facebook btn-brand mr-1 mb-1"><i className="fa fa-facebook"></i><span>Facebook</span></Button>
+                  <Button size="sm" onClick={e => {console.log(e)}} className="btn-facebook btn-brand mr-1 mb-1"><i className="fa fa-facebook"></i><span>Facebook</span></Button>
                   <Button size="sm" className="btn-twitter btn-brand mr-1 mb-1"><i className="fa fa-twitter"></i><span>Twitter</span></Button>
                   <Button size="sm" className="btn-linkedin btn-brand mr-1 mb-1"><i className="fa fa-linkedin"></i><span>LinkedIn</span></Button>
                   <Button size="sm" className="btn-flickr btn-brand mr-1 mb-1"><i className="fa fa-flickr"></i><span>Flickr</span></Button>

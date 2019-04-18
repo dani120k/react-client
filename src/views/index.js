@@ -21,6 +21,8 @@ import {
   Tabs,
   Tooltips,
 } from './Base';
+import {Inner, CustomComponent} from './MyCustom'
+
 
 import { ButtonDropdowns, ButtonGroups, Buttons, BrandButtons } from './Buttons';
 import Charts from './Charts';
@@ -32,6 +34,8 @@ import { Colors, Typography } from './Theme';
 import Widgets from './Widgets';
 
 export {
+  Inner,
+  CustomComponent,
   Badges,
   Typography,
   Colors,
