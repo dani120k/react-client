@@ -145,6 +145,12 @@ class Inner extends Component {
   }
 
   handleClick(e){
+    axios.get('http://localhost:8080/product/addCexToProduct?name=product&cex=name')
+      .then(res => {
+        console.log(res);
+      })
+
+    console.log(this.state.people)
     console.log('ffsk')
     this.state.bages.push(e);
     console.log(this.state.bages)
@@ -153,12 +159,13 @@ class Inner extends Component {
   renderCex(){
       return this.state.cex.map(value => {
         return (
-        <Dropdown.Item key={value.name}>
+          <li><a onClick={this.handleClick}>Html</a></li>)
+        /*<Dropdown.Item key={value.name}>
           <div onClick={this.handleClick(value.name)}>
             {value.name}
           </div>
         </Dropdown.Item>
-        )
+        )*/
       })
   }
 
