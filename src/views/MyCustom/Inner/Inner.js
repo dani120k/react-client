@@ -39,7 +39,7 @@ class Inner extends Component {
       up: false,
       pathToFile:'./logo400x400.jpg',
       file:'',
-      bages:['cex1', 'cex2'],
+      bages:[],
     };
 
     this.toggle = this.toggle.bind(this);
@@ -51,28 +51,12 @@ class Inner extends Component {
     this.handleChangePrice = this.handleChangePrice.bind(this);
     this.handleChangeDesc = this.handleChangeDesc.bind(this);
     this.deleteProduct = this.deleteProduct.bind(this);
-    this.sendFile = this.sendFile.bind(this);
     this.renderCex = this.renderCex.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.renderBages = this.renderBages.bind(this);
     this.updateThis = this.updateThis.bind(this);
   }
 
-  sendFile(){
-    /*let formData = new FormData();
-    formData.append(this.state.pathToFile, this.file);
-    console.log(formData);
-    axios.post( 'localhost:8080/picture/file',
-      formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }
-    ).then(function(){
-      console.log('SUCCESS!!');
-    })*/
-  }
 
 
   componentDidMount(){
@@ -147,35 +131,50 @@ class Inner extends Component {
   handleClick(e){
     axios.get('http://localhost:8080/product/addCexToProduct?name=product&cex=name')
       .then(res => {
-        console.log(res);
+        console.log('resdata' + res.data);
       })
+
+
+
 
     console.log(this.state.people)
     console.log('ffsk')
-    this.state.bages.push(e);
-    console.log(this.state.bages)
+
+    this.componentDidMount()
+    this.render()
   }
 
   renderCex(){
       return this.state.cex.map(value => {
         return (
-          <li><a onClick={this.handleClick}>Html</a></li>)
-        /*<Dropdown.Item key={value.name}>
-          <div onClick={this.handleClick(value.name)}>
-            {value.name}
+          <div>
+          <li><a onClick={this.handleClick}>{value.name}</a></li>
           </div>
-        </Dropdown.Item>
-        )*/
+        )
       })
   }
 
-  renderBages(){
-    var arr = ['cex1','cex2']
-      return arr.map(value => {
-        return (
-          <Badge className="pull-right" variant="primary">{value}</Badge>
-        )
-      })
+  renderBages(name){
+
+    var arr ='http://localhost:8080/product/test?name=product'
+    var obj;
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open('GET', 'http://localhost:8080/product/test?name=product', true);
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4) {
+        if(xmlhttp.status == 200) {
+          obj = JSON.parse(xmlhttp.responseText);
+        }
+      }
+    };
+    console.log(obj)
+    console.log(arr)
+    return obj.map(value => {
+      return (
+        <Badge className="pull-right" variant="primary">test</Badge>
+      )
+    })
   }
 
 
@@ -211,7 +210,7 @@ class Inner extends Component {
               <Col xs="6" sm="4"></Col>
               <Col xs="6" sm="4"></Col>
               <Col sm="4">
-                {this.renderBages()}
+                {this.renderBages(value.name)}
               </Col>
             </Row>
             <Row>
