@@ -90,8 +90,9 @@ class Cex extends Component {
       warning: false,
       danger: false,
       info: false,
-      name: 'name',
-      desc: 'desc',
+      nameCex: '',
+      acName: '',
+      password:'',
       people: [],
     };
 
@@ -104,8 +105,9 @@ class Cex extends Component {
     this.toggleDanger = this.toggleDanger.bind(this);
     this.toggleInfo = this.toggleInfo.bind(this);
     this.sendNewCategory = this.sendNewCategory.bind(this);
-    this.handleChangeCat = this.handleChangeCat.bind(this);
-    this.handleChangeDesc = this.handleChangeDesc.bind(this);
+    this.handleChangeCexName = this.handleChangeCexName.bind(this);
+    this.handleChangeAcName = this.handleChangeAcName.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
     this.sendToServer = this.sendToServer.bind(this);
     this.refresh = this.refresh.bind(this);
   }
@@ -115,12 +117,12 @@ class Cex extends Component {
   }
 
   componentDidMount(){
-    /*axios.get('http://localhost:8080/price/getAll')
+    console.log(this.props.match.params.name);
+    axios.get('http://localhost:8080/cex/getAll')
       .then(res => {
-        const people = res.data;
-        this.setState({people});
-      })*/
-    this.sendToServer()
+        this.setState({people:res.data});
+      })
+    //this.sendToServer()
   }
 
   toggle() {
@@ -183,47 +185,50 @@ class Cex extends Component {
 
   sendToServer(){
     var data = {
-      categoryName: this.state.name,
-      description: this.state.desc
+      name: this.state.nameCex
     };
     var arr;
     console.log(data);
-    axios.post('http://localhost:8080/cex/add', data)
+    axios.post('http://localhost:8080/cex/add?name='+this.state.acName + '&password=' + this.state.password, data)
       .then(res => {
         console.log(res)
-        this.setState({people:res.data})
-        console.log(this.state.people);
         arr = res.data;
         return arr;
       })
       .catch(err => console.error(err));
+
+    this.componentDidMount();
+    this.render();
   }
 
   testRender = () => {
     console.log(this.state.people + "hi")
-    var cars =  this.state.people;
-    return cars.map(value => {
-      return (
 
-        <a className="list-group-item list-group-item-action" >
-          <Link to={{
-            pathname: '/custom/component/' +  value.id,
-            state: { fromDashboard: true }
-          }} style={{ textDecoration: 'none' }}>
-            <h5 className="list-group-item-heading">{value.categoryName}</h5>
-            <p className="list-group-item-text">{value.description}</p><span className=" pull-right">{value.count}</span>
-          </Link>
+    return this.state.people.map(value => {
+      return (
+        <a className="list-group-item list-group-item-action">
+            <h5 className="list-group-item-heading">{value.name}</h5>
+            <p className="list-group-item-text">Login: {value.account.name}</p>
+            <p className="list-group-item-text">Password: {value.account.password}</p>
         </a>
     )
     })
   }
 
-  handleChangeCat(event) {
-    this.setState({name: event.target.value});
+  handleChangeCexName(event) {
+    this.setState({nameCex: event.target.value});
   }
 
   handleChangeDesc(event) {
     this.setState({desc: event.target.value});
+  }
+
+  handleChangeAcName(event){
+    this.setState({acName:event.target.value});
+  }
+
+  handleChangePassword(event){
+    this.setState({password:event.target.value})
   }
 
   render() {
@@ -239,17 +244,17 @@ class Cex extends Component {
                      className={'modal-primary ' + this.props.className}>
                 <ModalHeader toggle={this.togglePrimary}>Создание категории</ModalHeader>
                 <ModalBody>
-                    <TextField label="Название цеха" outlined textarea onChange={(e) => {this.handleChangeCat(e)}}>
+                    <TextField label="Название цеха" outlined textarea onChange={(e) => {this.handleChangeCexName(e)}}>
                         <Input name="name" inputType="text" />
                     </TextField>
                 </ModalBody>
                 <ModalBody>
-                  <TextField label="Имя аккаунта" outlined textarea onChange={(e) => {this.handleChangeDesc(e)}}>
+                  <TextField label="Имя аккаунта" outlined textarea onChange={(e) => {this.handleChangeAcName(e)}}>
                     <Input name="name" inputType="text" />
                   </TextField>
                 </ModalBody>
                 <ModalBody>
-                  <TextField label="Пароль" outlined textarea onChange={(e) => {this.handleChangeDesc(e)}}>
+                  <TextField label="Пароль" outlined textarea onChange={(e) => {this.handleChangePassword(e)}}>
                     <Input name="name" inputType="text" />
                   </TextField>
                 </ModalBody>

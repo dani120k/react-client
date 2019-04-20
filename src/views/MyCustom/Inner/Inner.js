@@ -39,6 +39,7 @@ class Inner extends Component {
       up: false,
       pathToFile:'./logo400x400.jpg',
       file:'',
+      bages:[],
     };
 
     this.toggle = this.toggle.bind(this);
@@ -51,6 +52,9 @@ class Inner extends Component {
     this.handleChangeDesc = this.handleChangeDesc.bind(this);
     this.deleteProduct = this.deleteProduct.bind(this);
     this.sendFile = this.sendFile.bind(this);
+    this.renderCex = this.renderCex.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.renderBages = this.renderBages.bind(this);
   }
 
   sendFile(){
@@ -75,6 +79,13 @@ class Inner extends Component {
     axios.get('http://localhost:8080/product/getAll?name='+this.props.match.params.name)
       .then(res => {
         this.setState({people:res.data});
+      })
+    var cars = [];
+    axios.get('http://localhost:8080/cex/getAll')
+      .then(res => {
+        cars = res.data;
+        this.setState({cex:res.data});
+        return cars;
       })
   }
 
@@ -132,6 +143,32 @@ class Inner extends Component {
     this.render()
   }
 
+  handleClick(e){
+    console.log('ffsk')
+    this.state.bages.push(e);
+    console.log(this.state.bages)
+  }
+
+  renderCex(){
+      return this.state.cex.map(value => {
+        return (
+        <Dropdown.Item key={value.name} onClick={this.handleClick(value.name)}>
+          <Button onClick={this.handleClick(value.name)}>
+            {value.name}
+          </Button>
+        </Dropdown.Item>
+        )
+      })
+  }
+
+  renderBages(){
+      return this.state.bages.map(value => {
+        return (
+          <Badge className="pull-right" variant="primary">{value.name}</Badge>
+        )
+      })
+  }
+
 
   testRender = () => {
     console.log(this.state.people);
@@ -153,10 +190,9 @@ class Inner extends Component {
               <Col xs="6" sm="4"></Col>
               <Col xs="6" sm="4"></Col>
               <Col sm="4">
-                <DropdownButton id="dropdown-basic-button" title="Dropdown button" className="pull-right">
-                  <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                <DropdownButton id="dropdown-basic-button" title="Цеха" className="pull-right">
+                  {this.renderCex()}
+
                 </DropdownButton>
               </Col>
             </Row>
@@ -166,7 +202,7 @@ class Inner extends Component {
               <Col xs="6" sm="4"></Col>
               <Col xs="6" sm="4"></Col>
               <Col sm="4">
-                <Badge className="pull-right" variant="primary">Primary</Badge> <Badge className="pull-right" variant="primary">Primary</Badge>
+                {this.renderBages()}
               </Col>
             </Row>
             <Row>
