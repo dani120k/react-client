@@ -20,6 +20,8 @@ import { rgbToHex } from '@coreui/coreui/dist/js/coreui-utilities'
 import * as axios  from 'axios';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import logo from "../Inner/logo400x400.jpg";
+import {DropdownButton} from "react-bootstrap";
 
 
 
@@ -108,6 +110,8 @@ class CustomComponent extends Component {
     this.handleChangeCat = this.handleChangeCat.bind(this);
     this.handleChangeDesc = this.handleChangeDesc.bind(this);
     this.sendToServer = this.sendToServer.bind(this);
+    this.updateThis = this.updateThis.bind(this);
+    this.deleteProduct = this.deleteProduct.bind(this);
   }
 
   componentDidMount(){
@@ -196,20 +200,45 @@ class CustomComponent extends Component {
       .catch(err => console.error(err));
   }
 
+  deleteProduct(e){
+    console.log(e)
+    axios.get('http://localhost:8080/category/delete?name='+e)
+      .then(res => {
+      })
+    this.componentDidMount();
+    this.render()
+  }
+
   testRender = () => {
     console.log(this.state.people + "hi")
     var cars =  this.state.people;
     return cars.map(value => {
       return (
-        <Link to={{
-          pathname: '/custom/component/' +  value.name,
-          state: { fromDashboard: true }
-        }} style={{ textDecoration: 'none' }}>
-            <a className="list-group-item list-group-item-action" >
-            <h5 className="list-group-item-heading">{value.name}</h5>
-            <p className="list-group-item-text">{value.desc}</p><span className=" pull-right">{value.count}</span>
-        </a>
-        </Link>
+
+          <CardBody>
+            <div id={value.id} key={value.id} aria-disabled={true}>
+              <CardBody>
+                <a className="list-group-item list-group-item-action" aria-disabled={true}>
+                  <Row>
+                    <Col xs="6" sm="4"></Col>
+                    <Col xs="6" sm="4"></Col>
+                    <Col sm="4">
+                      <Button className="pull-right" color="danger" onClick={e => {this.deleteProduct(value.name)}} >Удалить</Button>
+                      <Button className="pull-right" color="secondary" >Редактировать</Button>
+                    </Col>
+                  </Row>
+                  <Link to={{
+                    pathname: '/custom/component/' +  value.name,
+                    state: { fromDashboard: true }
+                  }} style={{ textDecoration: 'none' }}>
+                  <h5 className="list-group-item-heading">{value.name}</h5>
+                  <p className="list-group-item-text">{value.name}</p>
+                  </Link>
+                </a>
+              </CardBody>
+            </div>
+          </CardBody>
+
     )
     })
   }
@@ -221,6 +250,11 @@ class CustomComponent extends Component {
   handleChangeDesc(event) {
     this.setState({desc: event.target.value});
   }
+
+  updateThis(e){
+    this.togglePrimary();
+  }
+
 
   render() {
 
@@ -254,7 +288,7 @@ class CustomComponent extends Component {
               </Modal>
             </Col>
           </Row>
-        <div className="list-group">
+        <div className="list-group" id='ex'>
           {this.testRender()}
         </div>
 

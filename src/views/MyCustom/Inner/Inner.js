@@ -32,14 +32,14 @@ class Inner extends Component {
       danger: false,
       info: false,
       people: [],
-      name: 'name',
+      name: '',
       price: 0,
       desc: '',
       cex: [],
       up: false,
       pathToFile:'./logo400x400.jpg',
       file:'',
-      bages:[],
+      bages:['cex1', 'cex2'],
     };
 
     this.toggle = this.toggle.bind(this);
@@ -55,6 +55,7 @@ class Inner extends Component {
     this.renderCex = this.renderCex.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.renderBages = this.renderBages.bind(this);
+    this.updateThis = this.updateThis.bind(this);
   }
 
   sendFile(){
@@ -152,19 +153,20 @@ class Inner extends Component {
   renderCex(){
       return this.state.cex.map(value => {
         return (
-        <Dropdown.Item key={value.name} onClick={this.handleClick(value.name)}>
-          <Button onClick={this.handleClick(value.name)}>
+        <Dropdown.Item key={value.name}>
+          <div onClick={this.handleClick(value.name)}>
             {value.name}
-          </Button>
+          </div>
         </Dropdown.Item>
         )
       })
   }
 
   renderBages(){
-      return this.state.bages.map(value => {
+    var arr = ['cex1','cex2']
+      return arr.map(value => {
         return (
-          <Badge className="pull-right" variant="primary">{value.name}</Badge>
+          <Badge className="pull-right" variant="primary">{value}</Badge>
         )
       })
   }
@@ -182,7 +184,7 @@ class Inner extends Component {
               <Col xs="6" sm="4"></Col>
               <Col sm="4">
                 <Button className="pull-right" color="danger" onClick={e => {this.deleteProduct(value.name)}} >Удалить</Button>
-                <Button className="pull-right" color="secondary" onClick={e=>{this.sendFile()}}>Редактировать</Button>
+                <Button className="pull-right" color="secondary" onClick={this.updateThis}>Редактировать</Button>
               </Col>
             </Row>
             <img src={logo} width="100" height="100" className="img-rounded" alt="Cinque Terre"/>
@@ -238,6 +240,11 @@ class Inner extends Component {
     this.setState({desc: event.target.value});
   }
 
+  updateThis(e){
+    this.togglePrimary();
+  }
+
+
   render() {
     const prodId = this.props.match.params.name;
 
@@ -254,17 +261,17 @@ class Inner extends Component {
                        className={'modal-primary ' + this.props.className}>
                   <ModalHeader toggle={this.togglePrimary}>Создание блюда</ModalHeader>
                   <ModalBody>
-                    <TextField label="Название продукта" outlined textarea onChange={(e) => {this.handleChangeCat(e)}}>
+                    <TextField label="Название продукта" value={this.state.name} defaultValue={this.state.name} outlined textarea onChange={(e) => {this.handleChangeCat(e)}}>
                       <Input name="name" inputType="text" />
                     </TextField>
                   </ModalBody>
                   <ModalBody>
-                    <TextField label="Цена" outlined textarea onChange={(e) => {this.handleChangePrice(e)}}>
+                    <TextField label="Цена" value={this.state.price}  defaultValue={this.state.price} outlined textarea onChange={(e) => {this.handleChangePrice(e)}}>
                       <Input name="name" inputType="text" />
                     </TextField>
                   </ModalBody>
                   <ModalBody>
-                    <TextField label="Состав" outlined textarea onChange={(e) => {this.handleChangeDesc(e)}}>
+                    <TextField label="Состав" value={this.state.desc  }  defaultValue={this.state.desc} outlined textarea onChange={(e) => {this.handleChangeDesc(e)}}>
                       <Input name="name" inputType="text" />
                     </TextField>
                   </ModalBody>
