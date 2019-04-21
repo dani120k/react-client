@@ -15,6 +15,7 @@ import logo from './logo400x400.jpg';
 import { Badge } from 'reactstrap';
 import { DropdownButton, Dropdown } from 'react-bootstrap';
 import { MenuItem } from 'react-bootstrap';
+import CurrComponent from './CurrComponent'
 
 var static_name;
 
@@ -40,6 +41,7 @@ class Inner extends Component {
       pathToFile:'./logo400x400.jpg',
       file:'',
       bages:[],
+      instr: '',
     };
 
     this.toggle = this.toggle.bind(this);
@@ -55,6 +57,7 @@ class Inner extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.renderBages = this.renderBages.bind(this);
     this.updateThis = this.updateThis.bind(this);
+    this.handleChangeInstr = this.handleChangeInstr.bind(this);
   }
 
 
@@ -129,7 +132,7 @@ class Inner extends Component {
   }
 
   handleClick(e){
-    axios.get('http://localhost:8080/product/addCexToProduct?name=product&cex=name')
+    axios.get('http://localhost:8080/product/addCexToProduct?name=test&cex=test')
       .then(res => {
         console.log('resdata' + res.data);
       })
@@ -154,27 +157,10 @@ class Inner extends Component {
       })
   }
 
-  renderBages(name){
-
-    var arr ='http://localhost:8080/product/test?name=product'
-    var obj;
-
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open('GET', 'http://localhost:8080/product/test?name=product', true);
-    xmlhttp.onreadystatechange = function() {
-      if (xmlhttp.readyState == 4) {
-        if(xmlhttp.status == 200) {
-          obj = JSON.parse(xmlhttp.responseText);
-        }
-      }
-    };
-    console.log(obj)
-    console.log(arr)
-    return obj.map(value => {
+  renderBages(e){
       return (
-        <Badge className="pull-right" variant="primary">test</Badge>
+        <CurrComponent name={e}/>
       )
-    })
   }
 
 
@@ -246,6 +232,10 @@ class Inner extends Component {
     this.setState({desc: event.target.value});
   }
 
+  handleChangeInstr(event){
+    this.setState({instr: event.target.value});
+  }
+
   updateThis(e){
     this.togglePrimary();
   }
@@ -278,6 +268,11 @@ class Inner extends Component {
                   </ModalBody>
                   <ModalBody>
                     <TextField label="Состав" value={this.state.desc  }  defaultValue={this.state.desc} outlined textarea onChange={(e) => {this.handleChangeDesc(e)}}>
+                      <Input name="name" inputType="text" />
+                    </TextField>
+                  </ModalBody>
+                  <ModalBody>
+                    <TextField label="Инструкция" value={this.state.instr}  defaultValue={this.state.instr} outlined textarea onChange={(e) => {this.handleChangeInstr(e)}}>
                       <Input name="name" inputType="text" />
                     </TextField>
                   </ModalBody>

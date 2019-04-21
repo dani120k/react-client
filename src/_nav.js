@@ -43,7 +43,7 @@ export default {
       class: ''             // optional class names space delimited list for title item ex: "text-center"
     },
     {
-      name: 'Charts',
+      name: 'Статистика',
       url: '/charts',
       icon: 'icon-pie-chart',
     },
@@ -56,32 +56,11 @@ export default {
       },
       class: ''             // optional class names space delimited list for title item ex: "text-center"
     },
+    ,
     {
-      name: 'Pages',
-      url: '/pages',
-      icon: 'icon-star',
-      children: [
-        {
-          name: 'Login',
-          url: '/login',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Register',
-          url: '/register',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Error 404',
-          url: '/404',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Error 500',
-          url: '/500',
-          icon: 'icon-star',
-        },
-      ],
+      name: 'Аккаунты',
+      url: '/account',
+      icon: 'icon-pie-chart',
     },
   ],
 };

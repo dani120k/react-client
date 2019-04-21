@@ -22,6 +22,7 @@ import {
   Tooltips,
 } from './Base';
 import {Inner, CustomComponent} from './MyCustom'
+import Account from './Account'
 
 
 import { ButtonDropdowns, ButtonGroups, Buttons, BrandButtons } from './Buttons';
@@ -36,6 +37,7 @@ import Widgets from './Widgets';
 export {
   Inner,
   CustomComponent,
+  Account,
   Badges,
   Typography,
   Colors,

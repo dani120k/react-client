@@ -31,7 +31,6 @@ const Alerts = React.lazy(() => import('./views/Notifications/Alerts'));
 const Badges = React.lazy(() => import('./views/Notifications/Badges'));
 const Modals = React.lazy(() => import('./views/Notifications/Modals'));
 const Colors = React.lazy(() => import('./views/Theme/Colors'));
-const Typography = React.lazy(() => import('./views/Theme/Typography'));
 const Widgets = React.lazy(() => import('./views/Widgets/Widgets'));
 const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
@@ -51,9 +50,10 @@ const routes = [
   { path: '/custom/component', exact: true, name: 'Категории', component: CustomComponent },
   { path: '/custom/component/:name', name: 'Продукты', component: Inner },
   { path: '/cex', exact: true, name: 'Цеха', component: WorkWithCex },
+  { path: '/account', exact: true, name: 'Аккаунты', component: Colors },
+
   //{ path: '/fortest', name: 'Refresh', component: refresh },
   { path: '/fortest', name: 'Refresh', component: Cex },
-  { path: '/theme/typography', name: 'Typography', component: Typography },
   { path: '/base', exact: true, name: 'Base', component: Cards },
   { path: '/base/cards', name: 'Cards', component: Cards },
   { path: '/base/forms', name: 'Forms', component: Forms },
@@ -87,7 +87,7 @@ const routes = [
   { path: '/notifications/badges', name: 'Badges', component: Badges },
   { path: '/notifications/modals', name: 'Modals', component: Modals },
   { path: '/widgets', name: 'Widgets', component: Widgets },
-  { path: '/charts', name: 'Charts', component: Charts },
+  { path: '/charts', name: 'Статистика', component: Charts },
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
 ];

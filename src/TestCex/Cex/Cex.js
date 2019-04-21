@@ -77,7 +77,7 @@ class ThemeColor extends Component {
 }
 
 
-class Colors extends Component {
+class Cex extends Component {
 
   constructor(props) {
     super(props);
@@ -107,6 +107,7 @@ class Colors extends Component {
     this.sendNewCategory = this.sendNewCategory.bind(this);
     this.handleChangeCexName = this.handleChangeCexName.bind(this);
     this.handleChangeAcName = this.handleChangeAcName.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
     this.sendToServer = this.sendToServer.bind(this);
     this.refresh = this.refresh.bind(this);
   }
@@ -206,11 +207,11 @@ class Colors extends Component {
     return this.state.people.map(value => {
       return (
         <a className="list-group-item list-group-item-action">
-          <h5 className="list-group-item-heading">{value.name}</h5>
-          <p className="list-group-item-text">Login: {value.account.name}</p>
-          <p className="list-group-item-text">Password: {value.account.password}</p>
+            <h5 className="list-group-item-heading">{value.name}</h5>
+            <p className="list-group-item-text">Login: {value.account.name}</p>
+            <p className="list-group-item-text">Password: {value.account.password}</p>
         </a>
-      )
+    )
     })
   }
 
@@ -223,47 +224,56 @@ class Colors extends Component {
   }
 
   handleChangeAcName(event){
-    this.setState({password:event.target.value});
+    this.setState({acName:event.target.value});
+  }
+
+  handleChangePassword(event){
+    this.setState({password:event.target.value})
   }
 
   render() {
 
     return (
       <div>
-        <Row className="align-items-center">
-          <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-            <Button color="primary" onClick={this.togglePrimary}>
-              <i className="fa fa-lightbulb-o"></i>&nbsp;Добавить новый цех
-            </Button>
-            <Modal isOpen={this.state.primary} toggle={this.togglePrimary}
-                   className={'modal-primary ' + this.props.className}>
-              <ModalHeader toggle={this.togglePrimary}>Создание категории</ModalHeader>
-              <ModalBody>
-                <TextField label="Имя аккаунта" outlined textarea onChange={(e) => {this.handleChangeCexName(e)}}>
-                  <Input name="name" inputType="text" />
-                </TextField>
-              </ModalBody>
-              <ModalBody>
-                <TextField label="Пароль" outlined textarea onChange={(e) => {this.handleChangeAcName(e)}}>
-                  <Input name="name" inputType="text" />
-                </TextField>
-              </ModalBody>
-              <ModalBody>
-              </ModalBody>
-              <ModalFooter>
-                <Button color="primary" onClick={this.sendNewCategory}>Сохранить</Button>{' '}
-                <Button color="secondary" onClick={this.togglePrimary}>Отменить</Button>
-              </ModalFooter>
-            </Modal>
-          </Col>
-        </Row>
+          <Row className="align-items-center">
+            <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
+              <Button color="primary" onClick={this.togglePrimary}>
+                <i className="fa fa-lightbulb-o"></i>&nbsp;Добавить новый цех
+              </Button>
+              <Modal isOpen={this.state.primary} toggle={this.togglePrimary}
+                     className={'modal-primary ' + this.props.className}>
+                <ModalHeader toggle={this.togglePrimary}>Создание категории</ModalHeader>
+                <ModalBody>
+                    <TextField label="Название цеха" outlined textarea onChange={(e) => {this.handleChangeCexName(e)}}>
+                        <Input name="name" inputType="text" />
+                    </TextField>
+                </ModalBody>
+                <ModalBody>
+                  <TextField label="Имя аккаунта" outlined textarea onChange={(e) => {this.handleChangeAcName(e)}}>
+                    <Input name="name" inputType="text" />
+                  </TextField>
+                </ModalBody>
+                <ModalBody>
+                  <TextField label="Пароль" outlined textarea onChange={(e) => {this.handleChangePassword(e)}}>
+                    <Input name="name" inputType="text" />
+                  </TextField>
+                </ModalBody>
+                <ModalBody>
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="primary" onClick={this.sendNewCategory}>Сохранить</Button>{' '}
+                  <Button color="secondary" onClick={this.togglePrimary}>Отменить</Button>
+                </ModalFooter>
+              </Modal>
+            </Col>
+          </Row>
         <div className="list-group">
           {this.testRender()}
         </div>
 
-      </div>
+    </div>
     );
   }
 }
 
-export default Colors;
+export default Cex;
